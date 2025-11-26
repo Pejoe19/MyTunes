@@ -47,8 +47,8 @@
       </Label>
       <TableView fx:id="TvPlaylists" layoutX="32.0" layoutY="142.0" prefHeight="454.0" prefWidth="209.0">
         <columns>
-          <TableColumn fx:id="tblCoPLName" prefWidth="75.0" text="Name" />
-          <TableColumn fx:id="tblCoPLSongs" prefWidth="75.0" text="Songs" />
+          <TableColumn fx:id="tblCoPLName" prefWidth="92.80001831054688" text="Name" />
+          <TableColumn fx:id="tblCoPLSongs" prefWidth="57.59996795654297" text="Songs" />
             <TableColumn fx:id="tblCoPLTime" prefWidth="55.0" text="Time" />
         </columns>
       </TableView>
@@ -62,57 +62,57 @@
           <TableColumn fx:id="tblCoPLTitle" prefWidth="137.0" text="Title" />
         </columns>
       </TableView>
-      <Button fx:id="btnAdd" layoutX="404.0" layoutY="143.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="42.0" text="Add" textAlignment="CENTER">
+      <Button fx:id="btnAdd" layoutX="398.0" layoutY="143.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="51.0" text="Add" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="btnNewPL" layoutX="34.0" layoutY="616.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="64.0" text="New Playlist">
+      <Button fx:id="btnNewPL" layoutX="33.0" layoutY="616.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="76.0" text="New Playlist">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
       </Button>
-      <Button fx:id="btnEditPL" layoutX="106.0" layoutY="616.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" text="Edit Playlist">
+      <Button fx:id="btnEditPL" layoutX="118.0" layoutY="616.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="68.0" text="Edit Playlist">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
       </Button>
-      <Button fx:id="btnPlUp" layoutX="252.0" layoutY="613.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="33.0" text="Up">
+      <Button fx:id="btnPlUp" layoutX="252.0" layoutY="616.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="33.0" text="Up">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
       </Button>
-      <Button fx:id="btnPLDown" layoutX="292.0" layoutY="613.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" text="Down">
+      <Button fx:id="btnPLDown" layoutX="290.0" layoutY="617.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="44.0" text="Down">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
       </Button>
-      <Button fx:id="btnPLSDelete" layoutX="333.0" layoutY="614.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="51.0" text="Delete">
+      <Button fx:id="btnPLSDelete" layoutX="339.0" layoutY="617.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="51.0" text="Delete">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
       </Button>
-      <Label fx:id="lbSongsOnPL" layoutX="250.0" layoutY="125.0" prefHeight="18.0" prefWidth="109.0" text="Songs on Playlist">
+      <Label fx:id="lbSongsOnPL" layoutX="250.0" layoutY="125.0" prefHeight="20.0" prefWidth="119.0" text="Songs on Playlist">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="btnNewSong" layoutX="466.0" layoutY="615.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="80.0" text="New Song">
+      <Button fx:id="btnNewSong" layoutX="460.0" layoutY="615.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="87.0" text="New Song">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnEditSong" layoutX="555.0" layoutY="616.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="76.0" text="Edit Song">
+      <Button fx:id="btnEditSong" layoutX="553.0" layoutY="615.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="87.0" text="Edit Song">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnDeleteSong" layoutX="642.0" layoutY="617.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Delete">
+      <Button fx:id="btnDeleteSong" layoutX="646.0" layoutY="615.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="68.0" text="Delete">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnClose" layoutX="797.0" layoutY="619.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="53.0" text="Close">
+      <Button fx:id="btnClose" layoutX="797.0" layoutY="619.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="54.0" text="Close">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -127,12 +127,12 @@
             <Font name="System Bold" size="10.0" />
          </font>
       </Button>
-      <Label fx:id="lbFilter" layoutX="568.0" layoutY="49.0" prefHeight="35.0" prefWidth="44.0" text="Filter:">
+      <Label fx:id="lbFilter" layoutX="558.0" layoutY="49.0" prefHeight="35.0" prefWidth="54.0" text="Filter:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="btnPLDelete" layoutX="177.0" layoutY="616.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" text="Delete">
+      <Button fx:id="btnPLDelete" layoutX="194.0" layoutY="616.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="46.0" text="Delete">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
