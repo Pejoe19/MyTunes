@@ -45,4 +45,16 @@ public class PlaylistDAO {
             throw new MusicException("Could not get songs from database", ex);
         }
     }
+
+    public void deletePlayList(Playlist playlist) throws Exception {
+        String SQL = "delete from dbo.Playlists where id=?";
+        try (Connection conn = DBConnector.getStaticConnection()){
+            PreparedStatement stmt = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            stmt.setInt(1,playlist.getId());
+            stmt.executeQuery();
+        }
+        catch (Exception e){
+            throw new Exception("something went wrong",e);
+        }
+    }
 }
