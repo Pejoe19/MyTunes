@@ -49,7 +49,7 @@
         <columns>
           <TableColumn fx:id="tblCoPLName" prefWidth="75.0" text="Name" />
           <TableColumn fx:id="tblCoPLSongs" prefWidth="75.0" text="Songs" />
-            <TableColumn fx:id="tblCoPLTime" prefWidth="60.0" text="Time" />
+            <TableColumn fx:id="tblCoPLTime" prefWidth="55.0" text="Time" />
         </columns>
       </TableView>
       <Label fx:id="lbPlaylists" layoutX="32.0" layoutY="124.0" prefHeight="18.0" prefWidth="68.0" text="Playlists">
