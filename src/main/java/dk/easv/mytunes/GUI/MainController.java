@@ -8,13 +8,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class MainController {
 
-
-
-
     @FXML private TableView TvPlaylists;
     @FXML private TableColumn tblCoPLName;
     @FXML private TableColumn tblCoPLSongs;
     @FXML private TableColumn tblCoPLTime;
+    @FXML private TableView tvSongs;
+    @FXML private TableColumn tblCoTitle;
+    @FXML private TableColumn tblCoArtist;
+    @FXML private TableColumn tblCoTitle1;
+    @FXML private TableColumn tblCoTime;
 
     private final Model model = new Model();
 
@@ -22,12 +24,23 @@ public class MainController {
     public MainController() {
     }
 
-
     public void initialize(){
+        loadSongs();
         loadPlaylists();
     }
 
+    private void loadSongs() {
+        tblCoTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        tblCoArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
+        tblCoTitle1.setCellValueFactory(new PropertyValueFactory<>("category"));
+        tblCoTime.setCellValueFactory(new PropertyValueFactory<>("formattedTime"));
 
+        try {
+            tvSongs.setItems(model.loadSongs());
+        } catch (MusicException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void loadPlaylists(){
         // Tells the table which properties of the playlist to show in which columns
