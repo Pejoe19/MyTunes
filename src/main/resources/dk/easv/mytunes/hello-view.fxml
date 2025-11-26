@@ -29,10 +29,10 @@
       </HBox>
       <TableView fx:id="tvSongs" layoutX="458.0" layoutY="142.0" prefHeight="459.0" prefWidth="395.0">
         <columns>
-          <TableColumn fx:id="tblCoTitle" prefWidth="125.0" text="Title" />
-          <TableColumn fx:id="tblCoArtist" prefWidth="115.0" text="Artist" />
-            <TableColumn fx:id="tblCoTitle1" prefWidth="90.0" text="Category" />
-            <TableColumn fx:id="tblCoTime" prefWidth="63.0" text="Time" />
+          <TableColumn fx:id="tblCoTitle" prefWidth="144.80001831054688" text="Title" />
+          <TableColumn fx:id="tblCoArtist" prefWidth="89.5999755859375" text="Artist" />
+            <TableColumn fx:id="tblCoTitle1" prefWidth="88.7999267578125" text="Category" />
+            <TableColumn fx:id="tblCoTime" prefWidth="68.0" text="Time" />
         </columns>
       </TableView>
       <Label fx:id="lbDisplay" layoutX="255.0" layoutY="58.0" prefHeight="49.0" prefWidth="238.0" style="-fx-border-color: black;" text="Is Now Playing...">
@@ -112,7 +112,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnClose" layoutX="797.0" layoutY="619.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="54.0" text="Close">
+      <Button fx:id="btnClose" layoutX="797.0" layoutY="616.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="54.0" text="Close">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
