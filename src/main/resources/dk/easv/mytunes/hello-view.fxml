@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="876.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.mytunes.GUI.MainController">
    <children>
       <Label fx:id="lbMyTunes" alignment="TOP_CENTER" layoutX="375.0" layoutY="6.0" prefHeight="23.0" prefWidth="104.0" text="MyTunes" textAlignment="CENTER">
@@ -68,14 +67,14 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="btnNewPL" layoutX="33.0" layoutY="611.0" mnemonicParsing="false" text="New Playlist">
+      <Button fx:id="btnNewPL" layoutX="34.0" layoutY="616.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="64.0" text="New Playlist">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="System Bold" size="10.0" />
          </font>
       </Button>
-      <Button fx:id="btnEditPL" layoutX="129.0" layoutY="612.0" mnemonicParsing="false" text="Edit Playlist">
+      <Button fx:id="btnEditPL" layoutX="106.0" layoutY="616.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" text="Edit Playlist">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="System Bold" size="10.0" />
          </font>
       </Button>
       <Button fx:id="btnPlUp" layoutX="252.0" layoutY="613.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="33.0" text="Up">
@@ -83,12 +82,12 @@
             <Font name="System Bold" size="10.0" />
          </font>
       </Button>
-      <Button fx:id="btnPLDown" layoutX="292.0" layoutY="613.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="35.0" text="Down">
+      <Button fx:id="btnPLDown" layoutX="292.0" layoutY="613.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" text="Down">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
       </Button>
-      <Button fx:id="btnPLDelete" layoutX="333.0" layoutY="614.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="51.0" text="Delete">
+      <Button fx:id="btnPLSDelete" layoutX="333.0" layoutY="614.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="51.0" text="Delete">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
@@ -98,22 +97,22 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="btnNewSong" layoutX="466.0" layoutY="615.0" mnemonicParsing="false" text="New Song">
+      <Button fx:id="btnNewSong" layoutX="466.0" layoutY="615.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="80.0" text="New Song">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnEditSong" layoutX="555.0" layoutY="616.0" mnemonicParsing="false" text="Edit Song">
+      <Button fx:id="btnEditSong" layoutX="555.0" layoutY="616.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="76.0" text="Edit Song">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnDeleteSong" layoutX="642.0" layoutY="617.0" mnemonicParsing="false" text="Delete">
+      <Button fx:id="btnDeleteSong" layoutX="642.0" layoutY="617.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" text="Delete">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnClose" layoutX="797.0" layoutY="619.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="53.0" text="Close">
+      <Button fx:id="btnClose" layoutX="797.0" layoutY="619.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="53.0" text="Close">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -133,5 +132,10 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
+      <Button fx:id="btnPLDelete" layoutX="177.0" layoutY="616.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" text="Delete">
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
