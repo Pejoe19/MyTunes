@@ -8,6 +8,8 @@ import javafx.scene.control.TableView;
 public class MainController {
 
 
+
+
     @FXML private TableView TvPlaylists;
     @FXML private TableColumn tblCoPLName;
     @FXML private TableColumn tblCoPLSongs;
@@ -19,4 +21,6 @@ public class MainController {
     private void getPlaylists(){
 
     }
+
+
 }
