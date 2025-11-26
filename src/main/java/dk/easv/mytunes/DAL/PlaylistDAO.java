@@ -25,7 +25,7 @@ public class PlaylistDAO {
         try (Connection conn = dbConnector.getConnection();
              Statement stmt = conn.createStatement())
         {
-            String sql = "SELECT * FROM dbo.Playlist";
+            String sql = "SELECT * FROM dbo.Playlists";
             ResultSet rs = stmt.executeQuery(sql);
 
             // Loop through rows from the database result set
@@ -45,5 +45,4 @@ public class PlaylistDAO {
             throw new MusicException("Could not get songs from database", ex);
         }
     }
-
 }
