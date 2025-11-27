@@ -23,10 +23,51 @@ public class Song {
         return String.format("%d.%02d", minutes, seconds);
     }
 
-    public int getId() { return id; }
-    public String getTitle() { return title; }
-    public String getArtist() { return artist; }
-    public String getCategory() { return category; }
-    public int getTime() { return time; }
-    public String getFilePath() { return filePath; }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public void setArtist(String artist) {
+        this.artist = artist;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
 }

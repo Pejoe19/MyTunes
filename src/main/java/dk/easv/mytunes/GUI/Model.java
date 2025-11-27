@@ -13,6 +13,9 @@ public class Model {
     private ObservableList<Song> songs;
     private ObservableList<Playlist> playlists;
 
+    public Model() throws MusicException {
+    }
+
     public ObservableList<Song> loadSongs() throws MusicException {
         songs = FXCollections.observableArrayList(logic.getSongs());
         return songs;
@@ -26,5 +29,21 @@ public class Model {
         // Gets the data from logic
         playlists = FXCollections.observableList(logic.getPlaylists());
         return playlists;
+    }
+
+    public void updateSong(Song song) throws MusicException {
+        //
+        Song updatedSong = logic.updateSong(song);
+
+        //Applies the update in the observable list
+        if(updatedSong != null){
+            for(int i = 0; i < songs.size(); i++){
+                Song currentSong = (Song) songs.get(i);
+                if(currentSong.getId() == song.getId()){
+                    songs.remove(i);
+                    songs.add(i, updatedSong);
+                }
+            }
+        }
     }
 }

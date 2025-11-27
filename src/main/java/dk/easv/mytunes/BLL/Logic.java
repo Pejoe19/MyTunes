@@ -11,6 +11,9 @@ public class Logic {
 
     private final SongDAO songData = new SongDAO();
 
+    public Logic() throws MusicException {
+    }
+
     public List<Song> getSongs() throws MusicException {
         return songData.getAllSongs();
     }
@@ -21,4 +24,7 @@ public class Logic {
         return playlistData.getPlaylists();
     }
 
+    public Song updateSong(Song song) throws MusicException {
+        return songData.updateSong(song);
+    }
 }

@@ -10,14 +10,9 @@ import java.util.List;
 
 public class SongDAO {
 
-    private final DBConnector dbConnector;
+    private final DBConnector dbConnector = new DBConnector();
 
-    public SongDAO(){
-        try {
-            dbConnector = new DBConnector();
-        } catch (MusicException e) {
-            throw new RuntimeException(e);
-        }
+    public SongDAO() throws MusicException {
     }
 
     public List<Song> getAllSongs() throws MusicException {
@@ -45,5 +40,39 @@ public class SongDAO {
             throw new MusicException("Could not load songs from DB", e);
         }
         return songs;
+    }
+
+    public Song updateSong(Song song) throws MusicException {
+        try (Connection conn = dbConnector.getConnection())
+        {
+            PreparedStatement ps = conn.prepareStatement(
+                    "UPDATE dbo.Songs " +
+                            "SET Title = ?, Artist = ?, Category = ?, Time = ? " +
+                            "WHERE Id = ?"
+            );
+
+
+            ps.setString(1, song.getTitle());
+            ps.setString(2, song.getArtist());
+            ps.setString(3, song.getCategory());
+            //ps.setBytes(4, null);
+
+            int timeInSeconds = song.getTime();
+            int hours = timeInSeconds / 3600;
+            int minutes = (timeInSeconds % 3600) / 60;
+            int seconds = timeInSeconds % 60;
+            String sqlString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+
+
+            ps.setString(4, sqlString);
+            ps.setInt(5, song.getId());
+            ps.executeUpdate();
+
+            return song;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new MusicException("Could not update the song in the database");
+        }
     }
 }

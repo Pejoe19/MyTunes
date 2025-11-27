@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="641.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.mytunes.GUI.MainController">
+<AnchorPane prefHeight="400.0" prefWidth="641.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.mytunes.GUI.SongController">
    <children>
       <Label fx:id="lbNewEditSong" layoutX="240.0" layoutY="22.0" prefHeight="27.0" prefWidth="131.0" text="New/Edit Song">
          <font>
@@ -53,12 +53,12 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnCancel" layoutX="418.0" layoutY="339.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="88.0" text="Cancel">
+      <Button fx:id="btnCancel" layoutX="418.0" layoutY="339.0" mnemonicParsing="false" onAction="#onCancel" prefHeight="38.0" prefWidth="88.0" text="Cancel">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnSave" layoutX="518.0" layoutY="339.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="88.0" text="Save">
+      <Button fx:id="btnSave" layoutX="518.0" layoutY="339.0" mnemonicParsing="false" onAction="#onSave" prefHeight="38.0" prefWidth="88.0" text="Save">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

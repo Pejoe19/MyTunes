@@ -102,7 +102,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnEditSong" layoutX="553.0" layoutY="615.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="87.0" text="Edit Song">
+      <Button fx:id="btnEditSong" disable="true" layoutX="553.0" layoutY="615.0" mnemonicParsing="false" onAction="#editSong" prefHeight="30.0" prefWidth="87.0" text="Edit Song" AnchorPane.topAnchor="615.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
