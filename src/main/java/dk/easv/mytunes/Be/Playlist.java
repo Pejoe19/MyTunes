@@ -1,17 +1,22 @@
 package dk.easv.mytunes.Be;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Playlist {
 
     private int id;
     private String name;
     private int numberOfSongs = 0;
+    private List<IndexSong> songList;
     private int playTime = 0; //seconds
     private String formattedTime;
 
     public Playlist(int id, String name) {
         this.id = id;
         this.name = name;
+        songList = new ArrayList<>();
     }
 
     public Playlist(int id, String name, int numberOfSongs, int playTime) {
@@ -20,6 +25,7 @@ public class Playlist {
         this.numberOfSongs = numberOfSongs;
         this.playTime = playTime;
         this.formattedTime = getFormattedTime();
+        songList = new ArrayList<>();
     }
 
     public String getFormattedTime() {
@@ -58,6 +64,16 @@ public class Playlist {
 
     public void setPlayTime(int playTime) {
         this.playTime = playTime;
+    }
+
+    public List<IndexSong> getSongList() {
+        return songList;
+    }
+    public void addSongToSongList(IndexSong song) {
+        songList.add(song);
+    }
+    public void  setSongList(ArrayList<IndexSong> songList) {
+        this.songList.addAll(songList);
     }
 
     public void setFormattedTime(String formattedTime) {

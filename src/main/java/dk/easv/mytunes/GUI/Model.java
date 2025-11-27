@@ -2,16 +2,20 @@ package dk.easv.mytunes.GUI;
 
 import dk.easv.mytunes.BLL.Logic;
 import dk.easv.mytunes.BLL.MusicException;
+import dk.easv.mytunes.Be.IndexSong;
 import dk.easv.mytunes.Be.Playlist;
 import dk.easv.mytunes.Be.Song;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
 
 public class Model {
 
     private final Logic logic = new Logic();
     private ObservableList<Song> songs;
     private ObservableList<Playlist> playlists;
+    private ObservableList<IndexSong> activePlaylist;
 
     public Model() throws MusicException {
     }
@@ -30,6 +34,30 @@ public class Model {
         playlists = FXCollections.observableList(logic.getPlaylists());
         return playlists;
     }
+
+    public ObservableList<IndexSong> initializeActivePlayList() {
+        activePlaylist = FXCollections.observableList(new ArrayList<>());
+        return activePlaylist;
+    }
+
+    public void displayPlaylist(Playlist playlist) throws Exception {
+        activePlaylist.clear();
+        if(playlist.getSongList()!= null && !playlist.getSongList().isEmpty()) {
+            for (IndexSong indexSong : playlist.getSongList()) {
+                activePlaylist.add(indexSong);
+            }
+        }
+        else {
+            ArrayList<IndexSong> getPlaylistsSong = logic.getPlaylistsSong(playlist);
+            for (IndexSong indexSong : getPlaylistsSong) {
+                indexSong.setSong(songs.stream().filter((a) -> {return a.getId() == indexSong.getId();}).findFirst().orElse(null));
+            }
+            playlist.setSongList(getPlaylistsSong);
+            activePlaylist.addAll(playlist.getSongList());
+        }
+    }
+
+    public void clearActivePlaylist() { activePlaylist.clear();}
 
     public int updateSong(Song song) throws MusicException {
         //

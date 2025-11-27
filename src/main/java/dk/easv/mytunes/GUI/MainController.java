@@ -1,6 +1,7 @@
 package dk.easv.mytunes.GUI;
 
 import dk.easv.mytunes.BLL.MusicException;
+import dk.easv.mytunes.Be.IndexSong;
 import dk.easv.mytunes.Be.Playlist;
 import javafx.event.ActionEvent;
 import dk.easv.mytunes.Be.Song;
@@ -34,11 +35,13 @@ public class MainController {
     @FXML private TableColumn tblCoArtist;
     @FXML private TableColumn tblCoTitle1;
     @FXML private TableColumn tblCoTime;
+    @FXML private TableView<IndexSong> tvSongsOnPlaylist;
+    @FXML private TableColumn<IndexSong,String> tblCoPLTitle;
     @FXML private Button btnEditPL;
     @FXML private Label lbDisplay;
     @FXML private Button btnPlay;
     @FXML private TableView<Song> tvSongs;
-    @FXML private TableView<Song> tvSongsOnPlaylist;
+
 
     private Model model;
 
@@ -59,6 +62,7 @@ public class MainController {
     public void initialize(){
         loadSongs();
         loadPlaylists();
+        initializeActivePlaylist();
         btnEditPL.setOnAction(this::onEditPlaylist);
         btnPlay.setOnAction(event -> onPlay());
 
@@ -95,6 +99,24 @@ public class MainController {
         } catch (MusicException e) {
             displayError(e);
         }
+        TvPlaylists.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) ->{
+            if(newValue != null) {
+                try{
+                    model.displayPlaylist(newValue);
+                }
+                catch (Exception e){
+                    displayError(e);
+                }
+
+            }
+            else {
+                model.clearActivePlaylist();
+            }
+        });
+    }
+    private void initializeActivePlaylist() {
+        tblCoPLTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        tvSongsOnPlaylist.setItems(model.initializeActivePlayList());
     }
 
 
