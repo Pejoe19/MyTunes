@@ -72,7 +72,7 @@
             <Font name="System Bold" size="10.0" />
          </font>
       </Button>
-      <Button fx:id="btnEditPL" layoutX="118.0" layoutY="616.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="68.0" text="Edit Playlist">
+      <Button fx:id="btnEditPL" layoutX="118.0" layoutY="616.0" mnemonicParsing="false" onAction="#onEditPlaylist" prefHeight="26.0" prefWidth="68.0" text="Edit Playlist">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>

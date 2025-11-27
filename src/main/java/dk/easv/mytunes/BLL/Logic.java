@@ -35,4 +35,8 @@ public class Logic {
     public void deleteSong(Song song) throws MusicException {
         songData.deleteSong(song);
     }
+
+    public Playlist updatePlaylist(Playlist playlist) throws MusicException {
+        return playlistData.updatePlaylist(playlist);
+    }
 }

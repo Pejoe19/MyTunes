@@ -34,6 +34,7 @@ public class MainController {
     @FXML private TableColumn tblCoArtist;
     @FXML private TableColumn tblCoTitle1;
     @FXML private TableColumn tblCoTime;
+    @FXML private Button btnEditPL;
 
     private Model model;
 
@@ -53,6 +54,7 @@ public class MainController {
     public void initialize(){
         loadSongs();
         loadPlaylists();
+        btnEditPL.setOnAction(this::onEditPlaylist);
 
         tvSongs.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->{
             if(newValue != null){
@@ -89,14 +91,14 @@ public class MainController {
     }
 
 
-   @FXML
-   private void editSong(ActionEvent actionEvent) {
-       try {
-           openSongWindow("edit", selectedSong, actionEvent);
-       } catch (MusicException | IOException e) {
-           displayError(e);
-       }
-   }
+    @FXML
+    private void editSong(ActionEvent actionEvent) {
+        try {
+            openSongWindow("edit", selectedSong, actionEvent);
+        } catch (MusicException | IOException e) {
+            displayError(e);
+        }
+    }
 
     public void openSongWindow(String windowType, Song song, ActionEvent actionEvent) throws MusicException, IOException {
         // Loads the new fxml file
@@ -181,6 +183,53 @@ public class MainController {
                     displayError(e);
                 }
             }
+        }
+    }
+
+    @FXML
+    private void onEditPlaylist(ActionEvent actionEvent) {
+        Playlist selected = TvPlaylists.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            showAlert("Please select a playlist to edit.");
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/mytunes/NewEditPlaylist.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            PlaylistController controller = loader.getController();
+            controller.setParent(this);
+            controller.init(selected);
+
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Edit Playlist");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
+            stage.setResizable(false);
+            stage.showAndWait();
+
+            // Refresh playlists table after dialog closes
+            loadPlaylists();
+
+        } catch (IOException e) {
+            displayError(e);
+        }
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    public void updatePlaylist(Playlist playlist) {
+        try {
+            model.updatePlaylist(playlist);
+        } catch (Exception e) {
+            displayError(e);
         }
     }
 }

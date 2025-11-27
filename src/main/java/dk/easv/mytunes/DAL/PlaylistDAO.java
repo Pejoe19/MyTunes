@@ -57,4 +57,21 @@ public class PlaylistDAO {
             throw new Exception("something went wrong",e);
         }
     }
+
+    public Playlist updatePlaylist(Playlist playlist) throws MusicException {
+        String sql = "UPDATE dbo.Playlists SET Name = ? WHERE Id = ?";
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, playlist.getName());
+            stmt.setInt(2, playlist.getId());
+
+            int affectedRows = stmt.executeUpdate();
+            if (affectedRows == 0) {
+                throw new MusicException("Failed to update playlist, no rows affected");
+            }
+            return playlist;
+        } catch (SQLException e) {
+            throw new MusicException("Could not update playlist in database", e);
+        }
+    }
 }

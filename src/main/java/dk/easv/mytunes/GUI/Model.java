@@ -58,4 +58,16 @@ public class Model {
         logic.deleteSong(song);
         songs.remove(song);
     }
+
+    public void updatePlaylist(Playlist playlist) throws MusicException {
+        Playlist updated = logic.updatePlaylist(playlist);
+        if (updated != null) {
+            for (int i = 0; i < playlists.size(); i++) {
+                if (playlists.get(i).getId() == playlist.getId()) {
+                    playlists.set(i, updated);
+                    break;
+                }
+            }
+        }
+    }
 }
