@@ -24,6 +24,7 @@ import java.util.Optional;
 
 public class MainController {
 
+    @FXML private Button btnDeleteSong;
     @FXML private TableView<Playlist> TvPlaylists;
     @FXML private Button btnEditSong;
     @FXML private TableColumn tblCoPLName;
@@ -60,6 +61,7 @@ public class MainController {
             if(newValue != null){
                 selectedSong = (Song) newValue;
                 btnEditSong.setDisable(false);
+                btnDeleteSong.setDisable(false);
             }
         });
     }
@@ -81,7 +83,7 @@ public class MainController {
         // Tells the table which properties of the playlist to show in which columns
         tblCoPLName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tblCoPLSongs.setCellValueFactory(new PropertyValueFactory<>("numberOfSongs"));
-        tblCoPLTime.setCellValueFactory(new PropertyValueFactory<>("playTime"));
+        tblCoPLTime.setCellValueFactory(new PropertyValueFactory<>("formattedTime"));
         try {
             // Gets the data from model
             TvPlaylists.setItems(model.loadPlaylists());
