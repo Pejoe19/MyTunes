@@ -31,4 +31,8 @@ public class Logic {
     public Song updateSong(Song song) throws MusicException {
         return songData.updateSong(song);
     }
+
+    public void deleteSong(Song song) throws MusicException {
+        songData.deleteSong(song);
+    }
 }

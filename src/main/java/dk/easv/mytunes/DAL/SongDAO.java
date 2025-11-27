@@ -1,5 +1,6 @@
 package dk.easv.mytunes.DAL;
 
+import dk.easv.mytunes.Be.Playlist;
 import dk.easv.mytunes.Be.Song;
 import dk.easv.mytunes.BLL.MusicException;
 
@@ -51,7 +52,6 @@ public class SongDAO {
                             "WHERE Id = ?"
             );
 
-
             ps.setString(1, song.getTitle());
             ps.setString(2, song.getArtist());
             ps.setString(3, song.getCategory());
@@ -63,7 +63,6 @@ public class SongDAO {
             int seconds = timeInSeconds % 60;
             String sqlString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
 
-
             ps.setString(4, sqlString);
             ps.setInt(5, song.getId());
             ps.executeUpdate();
@@ -73,6 +72,18 @@ public class SongDAO {
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new MusicException("Could not update the song in the database");
+        }
+    }
+
+    public void deleteSong(Song song) throws MusicException {
+        String SQL = "delete from dbo.Songs where id=?";
+        try (Connection conn = DBConnector.getStaticConnection()){
+            PreparedStatement stmt = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            stmt.setInt(1,song.getId());
+            stmt.executeQuery();
+        }
+        catch (Exception e){
+            throw new MusicException("Could not delete song in the database",e);
         }
     }
 }

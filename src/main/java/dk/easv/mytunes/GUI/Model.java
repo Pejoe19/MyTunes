@@ -31,7 +31,7 @@ public class Model {
         return playlists;
     }
 
-    public void updateSong(Song song) throws MusicException {
+    public int updateSong(Song song) throws MusicException {
         //
         Song updatedSong = logic.updateSong(song);
 
@@ -42,13 +42,20 @@ public class Model {
                 if(currentSong.getId() == song.getId()){
                     songs.remove(i);
                     songs.add(i, updatedSong);
+                    return i;
                 }
             }
         }
+        return 0;
     }
 
     public void deletePlaylist(Playlist playlist) throws Exception {
         logic.deletePlaylist(playlist);
         playlists.remove(playlist);
+    }
+
+    public void deleteSong(Song song) throws MusicException {
+        logic.deleteSong(song);
+        songs.remove(song);
     }
 }

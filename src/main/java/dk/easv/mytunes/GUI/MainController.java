@@ -92,10 +92,7 @@ public class MainController {
    @FXML
    private void editSong(ActionEvent actionEvent) {
        try {
-           System.out.println(selectedSong.getId());
            openSongWindow("edit", selectedSong, actionEvent);
-
-
        } catch (MusicException | IOException e) {
            displayError(e);
        }
@@ -168,10 +165,22 @@ public class MainController {
 
     public void updateSong(Song song) {
         try {
-            model.updateSong(song);
-            tvSongs.getSelectionModel().select(song.getId()-1);
+            int placement = model.updateSong(song);
+            tvSongs.getSelectionModel().select(placement);
         } catch (Exception e) {
             displayError(e);
+        }
+    }
+
+    public void onDeleteSong(ActionEvent actionEvent) {
+        if(selectedSong != null) {
+            if(conformationMassage("conformation massage", "do you want to delete song "+ selectedSong.getTitle())){
+                try{
+                    model.deleteSong(selectedSong);
+                } catch (Exception e) {
+                    displayError(e);
+                }
+            }
         }
     }
 }
