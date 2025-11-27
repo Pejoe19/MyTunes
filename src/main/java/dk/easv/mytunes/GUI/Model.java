@@ -46,4 +46,9 @@ public class Model {
             }
         }
     }
+
+    public void deletePlaylist(Playlist playlist) throws Exception {
+        logic.deletePlaylist(playlist);
+        playlists.remove(playlist);
+    }
 }

@@ -1,9 +1,15 @@
 package dk.easv.mytunes.GUI;
 
 import dk.easv.mytunes.BLL.MusicException;
+import dk.easv.mytunes.Be.Playlist;
+import javafx.event.ActionEvent;
 import dk.easv.mytunes.Be.Song;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -14,10 +20,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import java.util.Optional;
+
 public class MainController {
 
+    @FXML private TableView<Playlist> TvPlaylists;
     @FXML private Button btnEditSong;
-    @FXML private TableView TvPlaylists;
     @FXML private TableColumn tblCoPLName;
     @FXML private TableColumn tblCoPLSongs;
     @FXML private TableColumn tblCoPLTime;
@@ -120,6 +128,35 @@ public class MainController {
         stage.show();
     }
 
+
+    @FXML
+    private void onDeletePlaylist(ActionEvent actionEvent) {
+        Playlist playlist = TvPlaylists.getSelectionModel().getSelectedItem();
+        if(playlist != null) {
+            if(conformationMassage("conformation massage", "do you want to delete playlist "+playlist.getName())){
+                try{
+                    model.deletePlaylist(playlist);
+                } catch (Exception e) {
+                    displayError(e);
+                }
+            }
+        }
+    }
+
+    /**
+     * a dialog to confirm something
+     * @param title the title
+     * @param message the message
+     * @return true for yes and false for cancel
+     */
+    private boolean conformationMassage(String title, String message){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.CANCEL);
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == ButtonType.YES;
+    }
 
     private void displayError(Throwable t)
     {
