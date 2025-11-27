@@ -30,12 +30,15 @@ public class MainController {
     @FXML private TableColumn tblCoPLName;
     @FXML private TableColumn tblCoPLSongs;
     @FXML private TableColumn tblCoPLTime;
-    @FXML private TableView tvSongs;
     @FXML private TableColumn tblCoTitle;
     @FXML private TableColumn tblCoArtist;
     @FXML private TableColumn tblCoTitle1;
     @FXML private TableColumn tblCoTime;
     @FXML private Button btnEditPL;
+    @FXML private Label lbDisplay;
+    @FXML private Button btnPlay;
+    @FXML private TableView<Song> tvSongs;
+    @FXML private TableView<Song> tvSongsOnPlaylist;
 
     private Model model;
 
@@ -48,6 +51,7 @@ public class MainController {
     }
 
     private Song selectedSong;
+    private Song currentSong;
 
     public MainController() {
     }
@@ -56,6 +60,7 @@ public class MainController {
         loadSongs();
         loadPlaylists();
         btnEditPL.setOnAction(this::onEditPlaylist);
+        btnPlay.setOnAction(event -> onPlay());
 
         tvSongs.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->{
             if(newValue != null){
@@ -232,6 +237,16 @@ public class MainController {
             model.updatePlaylist(playlist);
         } catch (Exception e) {
             displayError(e);
+        }
+    }
+
+    private void onPlay() {
+        if (selectedSong != null) {
+            currentSong = selectedSong;
+            lbDisplay.setText("Now playing: " + currentSong.getTitle() + " - " + currentSong.getArtist());
+            // Add actual audio playback here later
+        } else {
+            lbDisplay.setText("No song selected to play.");
         }
     }
 }
