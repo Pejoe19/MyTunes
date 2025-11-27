@@ -25,8 +25,6 @@ public class PlaylistDAO {
         try (Connection conn = dbConnector.getConnection();
              Statement stmt = conn.createStatement())
         {
-
-
             String sql = "SELECT p.Id, p.Name,\n" +
                     "COUNT(relation.songId) AS NumberOfSongs,\n" +
                     "ISNULL(SUM(DATEDIFF(SECOND, 0, s.Time)), 0) AS TotalSeconds\n" +
@@ -46,10 +44,7 @@ public class PlaylistDAO {
 
                 Playlist playlist = new Playlist(id, name, numberOfSongs, totalSeconds);
                 playlists.add(playlist);
-
-
             }
-
 
             return playlists;
         }
