@@ -53,6 +53,7 @@ public class Model {
                 indexSong.setSong(songs.stream().filter((a) -> {return a.getId() == indexSong.getId();}).findFirst().orElse(null));
             }
             playlist.setSongList(getPlaylistsSong);
+            playlist.sortSongList();
             activePlaylist.addAll(playlist.getSongList());
         }
     }

@@ -75,6 +75,9 @@ public class Playlist {
     public void  setSongList(ArrayList<IndexSong> songList) {
         this.songList.addAll(songList);
     }
+    public void sortSongList() {
+        songList.sort((a,b) -> {return a.getIndex()-b.getIndex();});
+    }
 
     public void setFormattedTime(String formattedTime) {
         this.formattedTime = formattedTime;
