@@ -3,6 +3,7 @@ package dk.easv.mytunes.GUI;
 import dk.easv.mytunes.BLL.MusicException;
 import dk.easv.mytunes.Be.IndexSong;
 import dk.easv.mytunes.Be.Playlist;
+import dk.easv.mytunes.DAL.PlaylistDAO;
 import javafx.event.ActionEvent;
 import dk.easv.mytunes.Be.Song;
 import javafx.event.ActionEvent;
@@ -263,12 +264,48 @@ public class MainController {
     }
 
     private void onPlay() {
-        if (selectedSong != null) {
-            currentSong = selectedSong;
+        Song songToPlay = null;
+        // Check if user selected from library
+        Song fromLibrary = tvSongs.getSelectionModel().getSelectedItem();
+        if (fromLibrary != null) {
+            songToPlay = fromLibrary;
+        }
+        // If not, check playlist table
+        else {
+            IndexSong selectedIndexSong = tvSongsOnPlaylist.getSelectionModel().getSelectedItem();
+            if (selectedIndexSong != null) {
+                songToPlay = selectedIndexSong.getSong();
+            }
+        }
+        if (songToPlay != null) {
+            currentSong = songToPlay;
             lbDisplay.setText("Now playing: " + currentSong.getTitle() + " - " + currentSong.getArtist());
-            // Add actual audio playback here later
         } else {
             lbDisplay.setText("No song selected to play.");
+        }
+    }
+
+    @FXML
+    private void onClickPLSDelete() {
+        Playlist selectedPlaylist = TvPlaylists.getSelectionModel().getSelectedItem();
+        IndexSong selectedIndexSong = tvSongsOnPlaylist.getSelectionModel().getSelectedItem();
+
+        if (selectedPlaylist != null && selectedIndexSong != null && selectedIndexSong.getSong() != null) {
+            Song selectedSong = selectedIndexSong.getSong();
+
+            if (conformationMassage("Remove Song",
+                    "Do you want to remove \"" + selectedSong.getTitle() +
+                            "\" from playlist \"" + selectedPlaylist.getName() + "\"?")) {
+
+                try {
+                    model.removeSongFromPlaylist(selectedPlaylist, selectedSong);
+                    model.displayPlaylist(selectedPlaylist); // Refresh the playlist view
+                } catch (Exception e) {
+                    displayError(e);
+                }
+            }
+        } else {
+            showAlert("Please select a playlist and a song to remove.");
         }
     }
 }

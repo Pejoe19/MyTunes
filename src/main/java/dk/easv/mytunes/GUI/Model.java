@@ -5,6 +5,7 @@ import dk.easv.mytunes.BLL.MusicException;
 import dk.easv.mytunes.Be.IndexSong;
 import dk.easv.mytunes.Be.Playlist;
 import dk.easv.mytunes.Be.Song;
+import dk.easv.mytunes.DAL.PlaylistDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 public class Model {
 
     private final Logic logic = new Logic();
+    private final PlaylistDAO playlistDAO = new PlaylistDAO();
     private ObservableList<Song> songs;
     private ObservableList<Playlist> playlists;
     private ObservableList<IndexSong> activePlaylist;
@@ -42,20 +44,30 @@ public class Model {
 
     public void displayPlaylist(Playlist playlist) throws Exception {
         activePlaylist.clear();
-        if(playlist.getSongList()!= null && !playlist.getSongList().isEmpty()) {
-            for (IndexSong indexSong : playlist.getSongList()) {
-                activePlaylist.add(indexSong);
+
+        // Always fetch the songs for this playlist from DB
+        ArrayList<IndexSong> playlistSongs = logic.getPlaylistsSong(playlist);
+
+        // Link each IndexSong to the correct Song from the loaded song list
+        for (IndexSong indexSong : playlistSongs) {
+            int songId = indexSong.getSong().getId();
+
+            // Try to find the real song from the main library list
+            Song realSong = songs.stream()
+                    .filter(s -> s.getId() == songId)
+                    .findFirst()
+                    .orElse(null);
+
+            // Replace placeholder with the real Song
+            if (realSong != null) {
+                indexSong.setSong(realSong);
             }
         }
-        else {
-            ArrayList<IndexSong> getPlaylistsSong = logic.getPlaylistsSong(playlist);
-            for (IndexSong indexSong : getPlaylistsSong) {
-                indexSong.setSong(songs.stream().filter((a) -> {return a.getId() == indexSong.getId();}).findFirst().orElse(null));
-            }
-            playlist.setSongList(getPlaylistsSong);
-            playlist.sortSongList();
-            activePlaylist.addAll(playlist.getSongList());
-        }
+
+        // Sort songs in playlist and refresh view
+        playlist.setSongList(playlistSongs);
+        playlist.sortSongList();
+        activePlaylist.addAll(playlist.getSongList());
     }
 
     public void clearActivePlaylist() { activePlaylist.clear();}
@@ -98,5 +110,9 @@ public class Model {
                 }
             }
         }
+    }
+
+    public void removeSongFromPlaylist(Playlist playlist, Song song) throws Exception {
+        logic.removeSongFromPlaylist(playlist, song);
     }
 }

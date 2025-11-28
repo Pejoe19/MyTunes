@@ -48,4 +48,9 @@ public class Logic {
     public ArrayList<IndexSong> getPlaylistsSong(Playlist playlist) throws Exception {
         return playlistsSongDAO.getPlaylistsSong(playlist);
     }
+
+    public void removeSongFromPlaylist(Playlist playlist, Song song) throws Exception {
+        playlistsSongDAO.removeSongFromPlaylist(playlist, song);
+    }
+
 }

@@ -1,16 +1,15 @@
 package dk.easv.mytunes.DAL;
 
+import dk.easv.mytunes.BLL.MusicException;
 import dk.easv.mytunes.Be.IndexSong;
 import dk.easv.mytunes.Be.Playlist;
 import dk.easv.mytunes.Be.Song;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class PlaylistsSongDAO {
+
     public ArrayList<IndexSong> getPlaylistsSong(Playlist playlist) throws Exception {
         String sql = "select * from dbo.SongPlaylistRelation where playlistId = ?";
         ArrayList<IndexSong> indexSongArrayList = new ArrayList<>();
@@ -22,7 +21,7 @@ public class PlaylistsSongDAO {
             while (rs.next()) {
                 int index = rs.getInt("index");
                 int songId = rs.getInt("SongId");
-                Song placeholdersong = new Song(songId,null,null,null,0,null);
+                Song placeholdersong = new Song(songId, "", "", "", 0, "");
                 IndexSong indexSong = new IndexSong(placeholdersong,index);
                 indexSongArrayList.add(indexSong);
             }
@@ -30,6 +29,21 @@ public class PlaylistsSongDAO {
         }
         catch (Exception e) {
             throw new Exception(e);
+        }
+    }
+
+    public void removeSongFromPlaylist(Playlist playlist, Song song) throws Exception {
+        String sql = "DELETE FROM dbo.SongPlaylistRelation WHERE PlaylistId = ? AND SongId = ?";
+
+        try (Connection conn = DBConnector.getStaticConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, playlist.getId());
+            stmt.setInt(2, song.getId());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new Exception("Could not remove song from playlist", e);
         }
     }
 }

@@ -69,12 +69,16 @@ public class Playlist {
     public List<IndexSong> getSongList() {
         return songList;
     }
+
     public void addSongToSongList(IndexSong song) {
         songList.add(song);
     }
-    public void  setSongList(ArrayList<IndexSong> songList) {
+
+    public void setSongList(ArrayList<IndexSong> songList) {
+        this.songList.clear();
         this.songList.addAll(songList);
     }
+
     public void sortSongList() {
         songList.sort((a,b) -> {return a.getIndex()-b.getIndex();});
     }

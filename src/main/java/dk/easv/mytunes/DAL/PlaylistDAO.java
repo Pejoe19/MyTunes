@@ -2,6 +2,7 @@ package dk.easv.mytunes.DAL;
 
 import dk.easv.mytunes.BLL.MusicException;
 import dk.easv.mytunes.Be.Playlist;
+import dk.easv.mytunes.Be.Song;
 
 import java.sql.*;
 import java.util.ArrayList;
