@@ -3,9 +3,8 @@ package dk.easv.mytunes.GUI;
 import dk.easv.mytunes.BLL.MusicException;
 import dk.easv.mytunes.Be.IndexSong;
 import dk.easv.mytunes.Be.Playlist;
-import dk.easv.mytunes.DAL.PlaylistDAO;
-import javafx.event.ActionEvent;
 import dk.easv.mytunes.Be.Song;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -21,7 +20,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
 import java.util.Optional;
 
 public class MainController {
@@ -43,7 +41,9 @@ public class MainController {
     @FXML private Button btnPlay;
     @FXML private TableView<Song> tvSongs;
 
-
+    private Song selectedSong;
+    private Song currentSong;
+    private Playlist selectedPlaylist;
     private Model model;
 
     {
@@ -53,9 +53,6 @@ public class MainController {
             displayError(e);
         }
     }
-
-    private Song selectedSong;
-    private Song currentSong;
 
     public MainController() {
     }
@@ -103,7 +100,8 @@ public class MainController {
         TvPlaylists.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) ->{
             if(newValue != null) {
                 try{
-                    model.displayPlaylist(newValue);
+                    selectedPlaylist = newValue;
+                    model.displayPlaylist(selectedPlaylist);
                 }
                 catch (Exception e){
                     displayError(e);
@@ -308,4 +306,40 @@ public class MainController {
             showAlert("Please select a playlist and a song to remove.");
         }
     }
+
+    public void onSongUp(ActionEvent actionEvent) {
+        moveIndex("up");
+    }
+
+    public void onSongDown(ActionEvent actionEvent) {
+        moveIndex("down");
+    }
+
+    private void moveIndex(String direction) {
+        // If a song on a playlist is selected in tableview
+        if(!(tvSongsOnPlaylist.getSelectionModel().isEmpty())) {
+            int selectedIndex = tvSongsOnPlaylist.getSelectionModel().getSelectedIndex();
+
+            int moveToIndex;
+            boolean canBeMoved;
+            if (direction.equals("down")) {
+                moveToIndex = selectedIndex + 1;
+                canBeMoved = selectedIndex < tvSongsOnPlaylist.getItems().size() - 1;
+            } else {
+                moveToIndex = selectedIndex - 1;
+                canBeMoved = selectedIndex > 0;
+            }
+
+            if (canBeMoved) {
+                try {
+                    model.switchPlaylistOrder(selectedPlaylist, selectedIndex, moveToIndex);
+                } catch (MusicException e) {
+                    displayError(e);
+                }
+                tvSongsOnPlaylist.getSelectionModel().select(moveToIndex);
+            }
+        }
+    }
+
+
 }

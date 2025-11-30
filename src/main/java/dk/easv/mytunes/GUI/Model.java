@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Model {
 
@@ -114,5 +115,13 @@ public class Model {
 
     public void removeSongFromPlaylist(Playlist playlist, Song song) throws Exception {
         logic.removeSongFromPlaylist(playlist, song);
+    }
+
+    public void switchPlaylistOrder(Playlist playlist, int songPlacementId, int newPlacementId) throws MusicException {
+        logic.switchPlaylistSongs(playlist, songPlacementId, newPlacementId);
+
+        IndexSong song = activePlaylist.get(songPlacementId);
+        activePlaylist.remove(song);
+        activePlaylist.add(newPlacementId, song);
     }
 }

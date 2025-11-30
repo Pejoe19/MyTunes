@@ -7,8 +7,14 @@ import dk.easv.mytunes.Be.Song;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PlaylistsSongDAO {
+
+    private final DBConnector dbConnector = new DBConnector();
+
+    public PlaylistsSongDAO() throws MusicException {
+    }
 
     public ArrayList<IndexSong> getPlaylistsSong(Playlist playlist) throws Exception {
         String sql = "select * from dbo.SongPlaylistRelation where playlistId = ?";
@@ -44,6 +50,33 @@ public class PlaylistsSongDAO {
 
         } catch (SQLException e) {
             throw new Exception("Could not remove song from playlist", e);
+        }
+    }
+
+    public void switchPlaylistSongs(Playlist playlist, int songPlacementId, int newPlacementId) throws MusicException {
+        String sql =
+                "UPDATE dbo.SongPlaylistRelation " +
+                        "SET [Index] = CASE " +
+                        "   WHEN [Index] = ? THEN ? " +
+                        "   WHEN [Index] = ? THEN ? " +
+                        "END " +
+                        "WHERE PlaylistID = ? AND [Index] IN (?, ?)";
+
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, songPlacementId);
+            ps.setInt(2, newPlacementId);
+            ps.setInt(3, newPlacementId);
+            ps.setInt(4, songPlacementId);
+            ps.setInt(5, playlist.getId());
+            ps.setInt(6, songPlacementId);
+            ps.setInt(7, newPlacementId);
+
+            ps.executeUpdate();
+        }
+        catch (Exception ex) {
+            throw new MusicException("Could not move the song", ex);
         }
     }
 }

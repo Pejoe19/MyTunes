@@ -14,7 +14,7 @@ public class Logic {
 
     private final SongDAO songData = new SongDAO();
     private final PlaylistDAO playlistData = new PlaylistDAO();
-    private final PlaylistsSongDAO playlistsSongDAO = new PlaylistsSongDAO();
+    private final PlaylistsSongDAO playlistsSongData = new PlaylistsSongDAO();
 
     public Logic() throws MusicException {
     }
@@ -46,11 +46,15 @@ public class Logic {
     }
 
     public ArrayList<IndexSong> getPlaylistsSong(Playlist playlist) throws Exception {
-        return playlistsSongDAO.getPlaylistsSong(playlist);
+        return playlistsSongData.getPlaylistsSong(playlist);
     }
 
     public void removeSongFromPlaylist(Playlist playlist, Song song) throws Exception {
-        playlistsSongDAO.removeSongFromPlaylist(playlist, song);
+        playlistsSongData.removeSongFromPlaylist(playlist, song);
+    }
+
+    public void switchPlaylistSongs(Playlist playlist, int songPlacementId, int newPlacementId) throws MusicException {
+        playlistsSongData.switchPlaylistSongs(playlist, songPlacementId, newPlacementId);
     }
 
 }

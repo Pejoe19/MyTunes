@@ -6,6 +6,7 @@ import dk.easv.mytunes.Be.Song;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PlaylistDAO {
 
@@ -83,4 +84,5 @@ public class PlaylistDAO {
             throw new MusicException("Could not update playlist in database", e);
         }
     }
+
 }

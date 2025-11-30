@@ -77,12 +77,12 @@
             <Font name="System Bold" size="10.0" />
          </font>
       </Button>
-      <Button fx:id="btnPlUp" layoutX="252.0" layoutY="616.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="33.0" text="Up">
+      <Button fx:id="btnPlUp" layoutX="252.0" layoutY="616.0" mnemonicParsing="false" onAction="#onSongUp" prefHeight="26.0" prefWidth="33.0" text="Up">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
       </Button>
-      <Button fx:id="btnPLDown" layoutX="290.0" layoutY="617.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="44.0" text="Down">
+      <Button fx:id="btnPLDown" layoutX="290.0" layoutY="617.0" mnemonicParsing="false" onAction="#onSongDown" prefHeight="26.0" prefWidth="44.0" text="Down">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
